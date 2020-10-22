@@ -1,0 +1,47 @@
+#Python3
+
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        
+        n=len(nums)
+        
+        #If the list is Empty
+        if len(nums)==0:
+            return [-1,-1]
+        
+        x=target
+        
+        #Using Binary Search to find the index at which target-0.5 would be inseted        
+        target=x-0.5
+        low,high=0,n
+        while low<high:
+            
+            mid=(low+high)//2
+            
+            if nums[mid]<target:
+                low=mid+1
+            else:
+                high=mid
+                
+        #if the index we received is the value of target this will be our left position        
+        if high>=n or nums[high]!=x:
+            return [-1,-1]
+            
+        ans=[low]
+        
+        #Using Binary Search to find the index at which target+0.5 would be inseted    
+        target=x+0.5
+        
+        low,high=0,n      
+        while low<high:
+            
+            mid=(low+high)//2
+            
+            if nums[mid]<target:
+                low=mid+1
+            else:
+                high=mid
+        
+        #The last position of target wwill be the index at which taget+0.5 is to be inserted - 1
+        ans.append(high-1)
+        return ans
