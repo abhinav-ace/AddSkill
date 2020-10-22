@@ -1,0 +1,27 @@
+class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:
+         
+        n=len(nums)
+        
+        #Checking for Edge Cases
+        
+        if target>nums[-1]:
+            return n
+        elif target<nums[0]:
+            return 0
+       
+        #Using Binary search to find the exact index
+        
+        low,high=0,n-1
+        while low<high:
+            
+            mid=(low+high)//2
+            
+            if nums[mid]<target:
+                low=mid+1
+                
+            else:
+                high=mid
+        
+        return low
+        
