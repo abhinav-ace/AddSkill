@@ -1,0 +1,36 @@
+'''
+Implement int sqrt(int x).
+
+Compute and return the square root of x, where x is guaranteed to be a non-negative integer.
+
+Since the return type is an integer, the decimal digits are truncated and only the integer part of the result is returned.
+'''
+#Pyhton3
+
+class Solution:
+    def mySqrt(self, x: int) -> int:
+    
+        #Using Binary Search from 0 to x
+        low,high=0,x
+        
+        while low<high:
+            
+            mid=(low+high)//2
+            
+            val=mid*mid
+            
+            #If x has a perfect square root
+            if val==x:
+                return mid
+            
+            elif val<x:
+                low=mid+1
+            
+            else:
+                high=mid
+                
+        #if x doesnt have a perfect square root
+        if low*low>x:
+            return low-1
+        return low
+                
