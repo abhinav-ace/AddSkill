@@ -1,0 +1,35 @@
+'''
+Given a list of non-negative integers nums, arrange them such that they form the largest number.
+
+Note: The result may be very large, so you need to return a string instead of an integer.
+'''
+#Python3
+
+class Larger(str):
+    def __lt__(x, y):
+        return x+y > y+x
+
+class Solution:
+   
+    def largestNumber(self, nums: List[int]) -> str:
+        
+        n=len(nums)
+        
+        #Typecasting
+        for i in range(n):
+            nums[i]=str(nums[i])
+            
+        #Sorting wrt __lt__ rich comparator for all the comparisons made while sorting between x,y values
+        #we check wether concatenation of x+y is greater or y+x is greater and sort accordingly.
+        nums=sorted(nums, key=Larger)
+        
+        #Creating the Largest Number
+        ans=''
+        for i in range(n):
+            ans+=nums[i]
+        
+        if ans[0]=='0':
+            return '0'
+        return ans
+    
+    
