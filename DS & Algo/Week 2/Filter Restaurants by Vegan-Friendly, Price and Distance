@@ -1,0 +1,40 @@
+'''
+Given the array restaurants where  restaurants[i] = [idi, ratingi, veganFriendlyi, pricei, distancei]. You have to filter the restaurants using three filters.
+
+The veganFriendly filter will be either true (meaning you should only include restaurants with veganFriendlyi set to true) or
+false (meaning you can include any restaurant). In addition, you have the filters maxPrice and maxDistance which are the maximum value for price and
+distance of restaurants you should consider respectively.
+
+Return the array of restaurant IDs after filtering, ordered by rating from highest to lowest.
+For restaurants with the same rating, order them by id from highest to lowest. For simplicity veganFriendlyi and veganFriendly take value 1 when it is true,
+and 0 when it is false.
+'''
+#Python3
+
+class Solution:
+
+    def filterRestaurants(self, restaurants: List[List[int]], veganFriendly: int, maxPrice: int, maxDistance: int) -> List[int]:
+    
+        left=[]
+        n=len(restaurants)
+        
+        #Creating a list according to the restaurant being vegan friendly or not
+        if veganFriendly==1:
+            for i in range(n):
+                    if restaurants[i][2]==veganFriendly and restaurants[i][3]<=maxPrice and restaurants[i][4]<=maxDistance:
+                        left.append(restaurants[i])
+        else:
+            for i in range(n):
+                if restaurants[i][3]<=maxPrice and restaurants[i][4]<=maxDistance:
+                    left.append(restaurants[i])
+        
+        #sorting the remaining restaurants on the basis of rating as primary key and id as secondary key 
+        left=sorted(left, key=lambda x: (x[1],x[0]))
+        ans=[]
+        for i in left:
+            ans.append(i[0])
+        
+        ans.reverse()
+        
+        return ans
+        
