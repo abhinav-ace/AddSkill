@@ -1,0 +1,24 @@
+'''
+Given an array A of positive lengths, return the largest perimeter of a triangle with non-zero area, formed from 3 of these lengths.
+
+If it is impossible to form any triangle of non-zero area, return 0.
+'''
+#Python3
+
+class Solution:
+    def largestPerimeter(self, A: List[int]) -> int:
+    
+        n=len(A)
+        #Sorting the List in Reverse Order
+        A.sort(reverse=True)
+                
+        #To form a triangle with three sides a,b,c; for each combination sum of two sides must always be greater then the third side.
+        #Since a≤b≤c:
+        #Case1: b+c>a: since b is always greater than or equal to a and we are adding c to it this condition becomes trivial.
+        #case2: a+c>b: since c is always greater than or equal to b and we are adding a to it this condition also becomes trivial.
+        #case3: a+b>c: this condition must be checked so we find a triplet that satisifies this and has max perimeter.
+        
+        for i in range(n-2):
+            if A[i]<A[i+1]+A[i+2]:
+                return A[i]+A[i+1]+A[i+2]
+        return 0
