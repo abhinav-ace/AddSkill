@@ -1,0 +1,30 @@
+'''
+Given a collection of intervals, merge all overlapping intervals.
+'''
+#Python3
+
+
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        
+        #Sorting intervals wrt start point of the interval
+        intervals=sorted(intervals,key=lambda x:x[0])
+        
+        #Edge Case- intervals is empty
+        if len(intervals)!=0:
+        
+            ans=[intervals[0]]
+            
+            for i in intervals:
+                
+                #If rightmost value of an interval is less than the left value of next interval we need to create new interval 
+                if ans[-1][1]<i[0]:
+                    ans.append(i)
+                    
+                #If rightmost value of an interval is greter than the left value of next interval we need to merge it to our previous interval 
+                else:
+                    ans[-1][1]=max(ans[-1][1],i[1])
+                    
+            return ans
+            
+        return
