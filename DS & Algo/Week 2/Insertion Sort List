@@ -1,3 +1,8 @@
+'''
+Sort a linked list using insertion sort.
+'''
+#Python3
+
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
@@ -6,39 +11,38 @@
 class Solution:
     def insertionSortList(self, head: ListNode) -> ListNode:
         
-        if head.next!=None:
+        #Checking if List is Empty or has one Node only
+        if head!=None and head.next!=None:
             curr=head.next
             prev=head
-
+            
+            #Traversing through all the Nodes
             while prev.next!=None:
-                if prev.val<curr.val:
+            
+                #If this condition fulfils, this means the node is in correct position
+                if prev.val<=curr.val:
                     prev=curr
                     curr=curr.next
-                    continue
-                prev.next=curr.next
-                insert(curr)
-                curr=prev.next
-
+                    
+                else:
+                    #Remove the Node and insert it in Sorted List
+                    prev.next=curr.next
+                    
+                    #Insertion in the Sorted List
+                    
+                    #Head insertion
+                    if head.val>curr.val:
+                        curr.next=head
+                        head=curr
+                        curr=prev.next
+                        
+                    #Find correct position And Insert
+                    else:
+                        inscurr=head
+                        while inscurr.next.val<curr.val:
+                            inscurr=inscurr.next
+                        curr.next=inscurr.next
+                        inscurr.next=curr
+                        curr=prev.next         
             return head
-        return head
-    
-    def insert(self,node):
-        
-        prev=None
-        curr=self.head
-        
-        if head.val>node.val:
-            node.next=head
-            head=node
-            return
-            
-        while curr.val<node.val:
-            prev=curr
-            curr=curr.next
-            
-        node.next=prev.next
-        prev.next=node
-        return 
-            
-            
-        
+        return head  
