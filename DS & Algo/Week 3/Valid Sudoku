@@ -14,7 +14,8 @@ Note:
 
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
-
+        
+        #Checking the validity of each row
         for i in range(9):
             s=set()
             
@@ -25,7 +26,8 @@ class Solution:
                         return False
                     
                     s.add(board[i][j])
-                    
+        
+        #Checking the validity of each column
         for i in range(9):
             s=set()
             
@@ -37,6 +39,7 @@ class Solution:
                     
                     s.add(board[j][i])
         
+        #Checking the validity of each 3*3 block
         for i in range(3):
             for j in range(3):
                 
