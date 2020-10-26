@@ -1,0 +1,13 @@
+'''
+Given two strings s and t , write a function to determine if t is an anagram of s.
+'''
+#Python3
+
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        
+        #Comparing sorted order of both the strings
+        if "".join(sorted(s))=="".join(sorted(t)):
+            return True
+        return False
+        
