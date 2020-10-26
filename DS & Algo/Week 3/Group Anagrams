@@ -26,7 +26,7 @@ class Solution:
                 dic[curr]=[strs[i]]
                 ans=[]
                 
-        #Now print all the values in the dictionary , these are all the desired group
+        #Now print all the values in the dictionary , these are all the desired groups
         for key,val in dic.items():
             ans.append(val)
         
