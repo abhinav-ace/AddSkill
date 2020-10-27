@@ -1,0 +1,54 @@
+'''
+A website domain like "discuss.leetcode.com" consists of various subdomains. At the top level, we have "com", at the next level, we have "leetcode.com",
+and at the lowest level, "discuss.leetcode.com". When we visit a domain like "discuss.leetcode.com", we will also visit the parent domains "leetcode.com" 
+and "com" implicitly.
+
+Now, call a "count-paired domain" to be a count (representing the number of visits this domain received), followed by a space, followed by the address. 
+An example of a count-paired domain might be "9001 discuss.leetcode.com".
+
+We are given a list cpdomains of count-paired domains. We would like a list of count-paired domains, (in the same format as the input, and in any order), 
+that explicitly counts the number of visits to each subdomain.
+'''
+#Python3
+
+class Solution:
+    def subdomainVisits(self, cpdomains: List[str]) -> List[str]:
+        
+        n=len(cpdomains)
+        dic={}
+        
+        
+        for i in range(n):
+        
+            #For each Domain splitting the visites and domain name 
+            cur=cpdomains[i].split(" ")
+            
+            #Splitting the domain name by '.'
+            splits=cur[1].split('.')
+            
+            #Finding all possible subdomains
+            if len(splits)==3:
+                domains=[cur[1]]+[splits[1]+'.'+splits[2]]+[splits[2]]
+                
+            elif len(splits)==2:
+                domains=[cur[1]]+[splits[1]]
+            
+            else:
+                domains=[cur[1]]
+            
+            #For each subdomain updating the value of visits in the dictionary
+            for i in domains:
+                if i in dic:
+                    dic[i]+=int(cur[0])
+                    
+                else:
+                    dic[i]=int(cur[0])
+                    
+        #Finally printing the result in the appropriate format
+        ans=[]
+        for key,value in dic.items():
+            ans.append(str(value)+" "+key)
+
+        return ans
+        
+        
