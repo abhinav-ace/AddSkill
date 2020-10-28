@@ -1,0 +1,27 @@
+'''
+Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+You can return the answer in any order.
+'''
+#Python3
+
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        
+        #In the previous set we store the value we need to have in the array for the current index to be a part of ans.
+        prev=set()
+        
+        for i in range((len(nums))):
+        
+            #If current index value is in the prev set this means we have its counter part in the array already
+            if nums[i] in prev:
+                second=i
+                break
+                
+            else:
+                prev.add(target-nums[i])
+        
+        first=nums.index(target-nums[second])
+        return [first,second]
