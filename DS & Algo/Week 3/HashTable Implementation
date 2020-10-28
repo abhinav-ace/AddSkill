@@ -1,0 +1,68 @@
+#Hashtable Implementation with linear probing.
+
+def hashvalue(key):
+    return key%40
+
+def put(key,value):
+    
+        if hashtable[hashvalue(key)][0]==0:
+            hashtable[hashvalue(key)][0]=key
+            hashtable[hashvalue(key)][1]=value
+            
+        else:
+            start=hashvalue(key)
+            i=(start+1)%40
+            while i!=start and hashtable[i][0]!=0 and hashtable[i][0]!='tombstone':
+                i=(i+1)%40
+                
+            hashtable[i][0]=key    
+            hashtable[i][1]=value  
+            
+        print(hashtable)
+
+def get(key):
+    
+    if hashtable[hashvalue(key)][0]==key:
+        return hashtable[hashvalue(key)][1]
+    
+    else:
+        start=hashvalue(key)
+        i=(start+1)%40
+        while i!=start and hashtable[i][0]!=key:
+            i=(i+1)%40
+            
+        return hashtable[i][1]
+        
+def delete(key):
+    
+    if hashtable[hashvalue(key)][0]==key:
+        hashtable[hashvalue(key)][0]='tombstone'
+        hashtable[hashvalue(key)][1]='tombstone'
+    
+    else:
+        start=hashvalue(key)
+        i=(start+1)%40
+        
+        while i!=start and hashtable[i][0]!=key:
+            i=(i+1)%40
+            
+        hashtable[i][0]='tombstone'
+        hashtable[i][1]='tombstone'
+        
+hashtable=[0]*40
+for i in range(40):
+    hashtable[i]=[0,0]
+
+'''put(4,"red")
+put(44,"blue")
+put(84,"yellow")
+delete(44)
+print(hashtable)
+get(84)
+put(124,"Pink")
+[[0, 0], [0, 0], [0, 0], [0, 0], [4, 'red'], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+[[0, 0], [0, 0], [0, 0], [0, 0], [4, 'red'], [44, 'blue'], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+[[0, 0], [0, 0], [0, 0], [0, 0], [4, 'red'], [44, 'blue'], [84, 'yellow'], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+[[0, 0], [0, 0], [0, 0], [0, 0], [4, 'red'], ['tombstone', 'tombstone'], [84, 'yellow'], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+[[0, 0], [0, 0], [0, 0], [0, 0], [4, 'red'], [124, 'Pink'], [84, 'yellow'], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+'''
