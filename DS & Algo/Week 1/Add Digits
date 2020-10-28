@@ -1,0 +1,20 @@
+'''
+Given a non-negative integer num, repeatedly add all its digits until the result has only one digit.
+'''
+#Python3
+
+class Solution:
+    def addDigits(self, num: int) -> int:
+    
+        string=str(num)
+        ans=int(string[0])
+        
+        #Adding the next digit to the current sum and if the length increases to two reduce it back to one.
+        for i in range(1,len(string)):
+        
+            ans+=int(string[i])
+            
+            if len(str(ans))==2:
+                ans=int(int(str(ans)[0])+int(str(ans)[1]))
+                
+        return ans
