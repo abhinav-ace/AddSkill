@@ -1,0 +1,38 @@
+'''
+Remove all elements from a linked list of integers that have value val.
+'''
+#Python3
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+class Solution:
+    def removeElements(self, head: ListNode, val: int) -> ListNode:
+    
+        #Edge Case.
+        if head==None:
+            return
+        
+        #If the value is in the head node move head.
+        while head!=None and head.val==val:
+            head=head.next
+        
+        #Find all the rest and delete them.
+        cur=head
+        prev=None
+        
+        while cur!=None:
+        
+            if cur.val==val:
+                cur=cur.next
+                prev.next=cur
+                
+            else:
+                prev=cur
+                cur=cur.next
+                
+        return head
+        
