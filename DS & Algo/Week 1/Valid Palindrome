@@ -1,0 +1,23 @@
+'''
+Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+
+Note: For the purpose of this problem, we define empty string as valid palindrome.
+'''
+#Python3
+
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+    
+        char='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+        string=''
+        #Creating a string with alphanumeric characters only.
+        for i in range(len(s)):
+            if s[i].upper() in char:
+                string+=s[i].upper()
+        
+        #If a string is equal to its reverse => palindrome.
+        if string==string[::-1]:
+            return True
+            
+        else:
+            return False        
