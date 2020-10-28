@@ -1,0 +1,38 @@
+'''
+Write a function to find the longest common prefix string amongst an array of strings.
+
+If there is no common prefix, return an empty string "".
+'''
+#Python3
+
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        
+        #Edge Case.
+        if strs==[]:
+            return ''
+            
+        ans=''
+        minlen=200
+        flag=0
+        
+        #Finding the length of the shortest string.
+        for i in range(len(strs)):
+            minlen=min(minlen,len(strs[i]))
+            
+        #Maximum length of common substring can be minlen.
+        for i in range(minlen):
+            char=strs[0][i]
+            
+            #For every character check if it is present in all the strings. 
+            for j in strs[1:]:
+                if j[i]!=char:
+                    flag=1
+                    break
+            else:
+                ans+=char
+                
+            if flag==1:
+                break
+                
+        return ans
