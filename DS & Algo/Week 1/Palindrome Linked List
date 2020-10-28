@@ -1,0 +1,41 @@
+'''
+Given a singly linked list, determine if it is a palindrome.
+'''
+#Python3
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+class Solution:
+    def isPalindrome(self, head: ListNode) -> bool:
+        
+        #Finding the center of the Linked List.
+        fast,slow=head,head
+        while fast!=None and fast.next!=None:
+            fast=fast.next.next
+            slow=slow.next
+            
+        #Reversing the Linked List from the center using three pointer approach.
+        prev,cur,nex=None,slow,None
+        
+        while cur!=None:
+            nex=cur.next
+            cur.next=prev
+            prev=cur
+            cur=nex
+        
+        #Comparing the values from extremes to the center.
+        #Head is pointing to the extreme left node and prev is pointing to the extreme right i.e. head of reversed half.
+        while prev:
+        
+            if prev.val!=head.val:
+                return False
+                
+            prev=prev.next
+            head=head.next   
+            
+        return True
+        
