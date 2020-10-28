@@ -1,0 +1,42 @@
+'''
+You are given two non-empty linked lists representing two non-negative integers. 
+The digits are stored in reverse order, and each of their nodes contains a single digit. 
+Add the two numbers and return the sum as a linked list.
+
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+'''
+#Python3
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+    
+        head=ListNode(0)
+        cur=head
+        carry=0
+        
+        #Keep adding the digits till boths the lists are empty.
+        while l1 or l2 or carry:
+            val1,val2=0,0
+            
+            if l1:
+                val1=l1.val
+                l1=l1.next
+                
+            if l2:
+                val2=l2.val
+                l2=l2.next
+            
+            #Create a new node with the sum as value.
+            ans=(val1+val2+carry)%10
+            carry=(val1+val2+carry)//10
+            cur.next=ListNode(ans)
+            cur=cur.next
+            
+        return head.next
+            
+        
