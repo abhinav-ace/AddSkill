@@ -1,0 +1,31 @@
+'''
+Given a sorted linked list, delete all duplicates such that each element appear only once.
+'''
+#Python3
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+    
+        prev,cur=None,head
+        
+        #Find the duplicates and remove one of them.
+        while cur!=None:
+        
+            if prev!=None and prev.val==cur.val :
+                cur=cur.next
+                prev.next=cur
+                                
+            else:
+                prev=cur
+                cur=cur.next
+                
+        return head
+                
+        
+        
