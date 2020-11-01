@@ -10,18 +10,30 @@ The order of output does not matter.
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
         
-        n=len(s)
-        m=len(p)
+        n=len(p)
+        m=len(s)
         
-        #Sorting p
-        p="".join(sorted(p))
+        #pcount is counter for string p and scount is the counter for strings
+        pcount=Counter(p)
+        scount=Counter(s[:n-1])
+        ans=[]        
         
-        ans=[]
-        
-        #Finding all substring of s of length m and comparing it with p
-        for i in range(n-m+1):
-            if "".join(sorted(s[i:i+m]))==p:
-                ans.append(i)
+        #Start from the first substring which will start from length of p-1.
+        for i in range(n-1,m):
+            
+            #Adding the new character to our counter.
+            scount[s[i]] += 1
+            
+            #if both the counters are same this means we have an answer.
+            if scount==pcount:
+                ans.append(i-n+1)
+            
+            #remove the character that we dont need anymore which will be the first character of substring under consideration.
+            scount[s[i-n+1]]-=1
+            
+            #if count of a character reduces to zero delete it from the counter.
+            if scount[s[i-n+1]]==0:
+                del scount[s[i-n+1]]
                 
         return ans
-        
+
