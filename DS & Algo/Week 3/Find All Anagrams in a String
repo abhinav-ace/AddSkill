@@ -7,6 +7,9 @@ The order of output does not matter.
 '''
 #Python3
 
+Time Complexity-O(n)
+Space Complexity-O(1)
+
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
         
@@ -25,6 +28,7 @@ class Solution:
             scount[s[i]] += 1
             
             #if both the counters are same this means we have an answer.
+            #This comparison is O(1) since there can be a maximum of 26 elements in the counter.
             if scount==pcount:
                 ans.append(i-n+1)
             
