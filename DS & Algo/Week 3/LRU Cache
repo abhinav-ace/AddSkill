@@ -1,0 +1,96 @@
+'''
+Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.
+
+Implement the LRUCache class:
+
+    LRUCache(int capacity) Initialize the LRU cache with positive size capacity.
+    int get(int key) Return the value of the key if the key exists, otherwise return -1.
+    void put(int key, int value) Update the value of the key if the key exists. 
+    Otherwise, add the key-value pair to the cache. If the number of keys exceeds the capacity from this operation, evict the least recently used key.
+
+Follow up:
+Could you do get and put in O(1) time complexity?
+'''
+#Python3
+
+class node():
+    def __init__(self,key,val):
+        self.key=key
+        self.val=val
+        self.next=None
+        self.prev=None
+        
+class LRUCache:
+
+    def __init__(self, capacity: int):
+        
+        #We create a doubly linked list the helps us with LRU eviction policy.
+        #List has a node padding at head and tail to avoid insertion and deletion at head and tail.
+        
+        #dic holds key,node pair so that we can access nodes in O(1).
+        
+        
+        self.capacity=capacity
+        self.head=node(0,0)
+        self.tail=node(0,0)
+        self.head.next=self.tail
+        self.tail.prev=self.head
+        self.dic={}
+    
+    def get(self, key: int) -> int:
+        
+        
+        #key is present in the cache.
+        if key in self.dic:
+        
+            #n is the node that we want.
+            n=self.dic[key]
+            
+            #now we delete that node from the list AND add it to the list.
+            #we do this to bring the node to the front of the list as this node is now the most recently used node.
+            self.delete(n)
+            self.insert(n)
+            
+            return n.val
+        
+        #key is not in cache.
+        return -1
+
+    def put(self, key: int, value: int) -> None:
+        
+        #If key is already present in the cache we simply delete it and add new key,value pair node in the list.
+        if key in self.dic:
+            self.delete(self.dic[key])
+            
+        n=node(key,value)
+        self.insert(n)
+        
+        #Update the new node corresponding to the key.
+        self.dic[key]=n
+        
+        #Eviction policy: if we have more elements that cache capacity delete the LRU node which is the head node of our list.
+        if len(self.dic) > self.capacity:
+            n = self.head.next
+            self.delete(n)
+            del self.dic[n.key]
+        
+    def delete(self,node):
+        
+        #Pointer manipulation to remove node n from the list.
+        node.next.prev=node.prev
+        node.prev.next=node.next
+
+    def insert(self,n):
+        
+        #Pointer manipulation to add node n to the tail of the list.
+        prev=self.tail.prev
+        prev.next=n
+        n.next=self.tail
+        self.tail.prev=n
+        n.prev=prev
+
+
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
