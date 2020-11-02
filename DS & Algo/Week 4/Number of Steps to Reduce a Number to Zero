@@ -1,0 +1,17 @@
+'''
+Given a non-negative integer num, return the number of steps to reduce it to zero. 
+If the current number is even, you have to divide it by 2, otherwise, you have to subtract 1 from it.
+'''
+#Python3
+Time Complexity= O(logn)
+Space Complexity= O(1)
+
+
+class Solution:
+    def numberOfSteps (self, num: int) -> int:
+        
+        #Converting the number to binary so time complexity is O(logn)
+        bin=format(num,'b')
+        
+        #Answer will be the number of set bin + len of bin -1
+        return len(bin)+bin.count('1')-1
