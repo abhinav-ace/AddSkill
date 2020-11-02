@@ -13,15 +13,14 @@ Space Complexity- O(1)
 class Solution:
     def findTheDifference(self, s: str, t: str) -> str:
         
-        s=''.join(sorted(s))
-        t=''.join(sorted(t))
+        res = 0
         
-        #Sorting both the strings and comparing the unequal character.
-        for i in range(len(s)):
-            if s[i]==t[i]:
-                None
-                
-            else:
-                return t[i]
-        
-        return t[-1]
+        #ord gives us the ascii value of a character.
+        #res holds the final xor value of all the character and since t will cancel all the characters in s only 1 will be left that will be our anser.
+        for letter in s:
+            res^=ord(letter)
+            
+        for letter in t:
+            res^=ord(letter)
+            
+        return chr(res)
