@@ -1,0 +1,55 @@
+'''
+Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+
+    push(x) -- Push element x onto stack.
+    pop() -- Removes the element on top of the stack.
+    top() -- Get the top element.
+    getMin() -- Retrieve the minimum element in the stack.
+'''
+#Python3
+
+Time Complexity- O(1)
+Space Complexity- O(N)
+
+class MinStack:
+
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.arr=[]
+        
+
+    def push(self, x: int) -> None:
+    
+        #Storing minimum till now with the element.
+        cur=self.getMin()
+        
+        if cur==None or x<cur:
+            cur=x
+            
+        self.arr.append((x,cur));
+
+
+    def pop(self) -> None:
+        self.arr.pop()
+
+    def top(self) -> int:
+        if len(self.arr)==None:
+            return None
+        
+        return self.arr[-1][0]
+
+    def getMin(self) -> int:
+        if len(self.arr)==0:
+            return None
+            
+        return self.arr[-1][1]
+
+
+# Your MinStack object will be instantiated and called as such:
+# obj = MinStack()
+# obj.push(x)
+# obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.getMin()
