@@ -1,0 +1,57 @@
+'''
+Given a circular array (the next element of the last element is the first element of the array), 
+print the Next Greater Number for every element. 
+The Next Greater Number of a number x is the first greater number to its traversing-order next in the array, 
+which means you could search circularly to find its next greater number. 
+If it doesn't exist, output -1 for this number. 
+'''
+#Python3
+
+Time Complexity- O(N)
+Space Complexity- O(N)
+
+class Solution:
+    def nextGreaterElements(self, nums: List[int]) -> List[int]:
+        
+        #stk holds the index and value of each element.
+        stk=[]
+        n=len(nums)
+        i=0
+        ans=[-1]*n
+                
+        while i<n:
+            
+            if len(stk)==0:
+                stk.append((i,nums[i]))
+                i+=1
+            
+            #If this condition holds this means nums[i] is the next greater element to the top of our stack.
+            elif stk[-1][1]<nums[i]:
+                cur=stk.pop()
+                ans[cur[0]]=nums[i]
+            
+            #Else we push onto the stack.    
+            elif stk[-1][1]>=nums[i]:
+                stk.append((i,nums[i]))
+                i+=1
+                
+        if len(stk)>0:
+            
+            #If Stack is not empty we traverse till the greatest element finding the next greatest for the remaining elements.
+            #The order of elements in the stack will be maximum element of nums at the bottom and then non increasing till the top.
+            
+            maxval=stk[0][1]
+            ind=nums.index(maxval)
+
+            i=0
+
+            while i<=ind:
+                if nums[i]>stk[-1][1]:
+                    cur=stk.pop()
+                    ans[cur[0]]=nums[i]
+                    
+                else:
+                    i+=1
+
+                  
+        return ans
