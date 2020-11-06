@@ -1,0 +1,36 @@
+'''
+Write an efficient algorithm that searches for a value in an m x n matrix. This matrix has the following properties:
+
+    Integers in each row are sorted from left to right.
+    The first integer of each row is greater than the last integer of the previous row.
+'''
+#Python3
+Time Complexity- O(log(M*N))
+Space Comlexity- O(1)
+
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        
+        n=len(matrix)
+        if n==0:
+            return 
+        m=len(matrix[0])
+        
+        #Applying Binary search as if the matrix was a 1D array.
+        first=0
+        last=(n*m)-1
+        
+        while first<=last:
+            mid=(first+last)//2
+            val=matrix[mid//m][mid%m]
+            
+            if val==target:
+                return True
+            
+            elif val>target:
+                last=mid-1
+            
+            else:
+                first=mid+1
+                
+        return False
