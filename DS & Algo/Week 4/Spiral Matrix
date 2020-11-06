@@ -1,0 +1,62 @@
+'''
+Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
+'''
+#Python3
+
+Time Complexity- O(N*M)
+Space Complexity- O(1)
+
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        
+        if len(matrix)==0:
+            return
+        
+        n=len(matrix)
+        m=len(matrix[0])
+        
+        top,bottom,left,right=0,n-1,0,m-1
+        
+        ans=[]
+        while top<bottom and left<right:
+            
+            #Printing top from left to right.
+            for i in range(left,right):
+                ans.append(matrix[top][i])
+            
+            #Printing right from top to bottom.
+            for i in range(top,bottom):
+                ans.append(matrix[i][right])
+            
+            #Printing bottom from right to left.
+            for i in range(right,left,-1):
+                ans.append(matrix[bottom][i])
+            
+            #Printing left from bottom to top.
+            for i in range(bottom,top,-1):
+                ans.append(matrix[i][left])
+            
+            #Removing 1 layer from matrix.
+            top+=1
+            right-=1
+            bottom-=1
+            left+=1
+        
+        
+        #One element in left.
+        if left==right and bottom==top:
+            ans.append(matrix[top][left])
+          
+        #Values in the middle most column are left.  
+        elif left==right:
+            for i in range(top,bottom+1):
+       		    ans.append(matrix[i][left])
+        
+        #Values in the middle most row are left.
+        elif top==bottom:
+       		for i in range(left,right+1):
+       			ans.append(matrix[top][i])  
+                
+        return ans
+    
+            
