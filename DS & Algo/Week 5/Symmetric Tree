@@ -30,11 +30,11 @@ class Solution:
             if t1==None or t2==None:
                 return 0
             
-            #if current node values are not equal-> not symmetric
+            #If current node values are not equal-> not symmetric
             if t1.val!=t2.val:
                 return 0
             
-            #perform the same on the left and right subtree
+            #Perform the same on the left and right subtree
             return symm(t1.left,t2.right) and symm(t1.right,t2.left)
         
         return symm(root.left,root.right)
