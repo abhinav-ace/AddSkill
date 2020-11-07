@@ -1,0 +1,36 @@
+'''
+Given a binary tree, you need to compute the length of the diameter of the tree. 
+The diameter of a binary tree is the length of the longest path between any two nodes in a tree. This path may or may not pass through the root. 
+'''
+#Python3
+
+Time Complexity- O(N)
+Space Complexity- O(N)
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def diameterOfBinaryTree(self, root: TreeNode) -> int:
+        
+        self.ans=1
+        
+        def depth(node):
+            
+            if node==None:
+                return 0
+            
+            l=depth(node.left)
+            r=depth(node.right)
+            
+            self.ans=max(self.ans,l+r+1)
+            
+            #For each node return the maximum of depth of left and right subtree +1 to the parent of that node. 
+            return max(l,r)+1
+            
+        depth(root) 
+        return self.ans-1
