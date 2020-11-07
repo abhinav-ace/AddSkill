@@ -6,6 +6,8 @@ Given the root of a binary tree, return the inorder traversal of its nodes' valu
 Time Complexity- O(N)
 Space Complexity- O(N)
 
+
+#RECURSIVE SOLUTION 1-
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -27,3 +29,49 @@ class Solution:
             
         inorder(root)
         return ans
+
+#RECURSIVE SOLUTION 2- More Compact
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        
+        def inorder(node):
+            if not node:
+                return []
+            
+            return inorder(node.left)+[node.val]+inorder(node.right)
+    
+        return inorder(root)
+
+#ITERATIVE SOLUTION-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        
+        stk=[]
+        ans=[]
+        
+        #We create a stack and go till the extreme left and then one by one pop store its value and move to its right subtree.
+        
+        while True:
+            while root:
+                stk.append(root)
+                root=root.left
+            
+            if len(stk)==0:
+                return ans
+                
+            root=stk.pop()
+            ans.append(root.val)
+
+            root=root.right
