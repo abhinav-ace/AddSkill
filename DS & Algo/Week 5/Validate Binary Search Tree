@@ -12,6 +12,9 @@ Assume a BST is defined as follows:
 Time Complexity- O(N)
 Space Complexity- O(N)
 
+
+#APPROACH 1: USING INORDER TRAVERSAL
+
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -40,3 +43,40 @@ class Solution:
         self.inorder(node.left,ans)
         ans.append(node.val)
         self.inorder(node.right,ans)
+
+
+
+
+#APPROACH 2: Using recursion
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    
+    def isValidBST(self, root: TreeNode) -> bool:
+        
+        #For every node we define a range and keep modifying it and if it doesnt lie in the defined range return false.
+        def BST(node,lo,ma):
+            
+            if node==None:
+                return 1
+            
+            val=node.val
+            
+            if val<=lo or val>=ma:
+                return 0
+            
+            #if we move to the left subtree the maximum allowed value in the left subtree is less than the value of current node.
+            #if we move to the right subtree the minimum allowed value in the right subtree is greater than the value of current node.
+            if not (BST(node.left,lo,val) and BST(node.right,val,ma)):
+                return 0
+            
+            return 1
+        
+        lo=float('-inf')
+        ma=float('inf')
+        return BST(root,lo,ma)
