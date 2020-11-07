@@ -1,0 +1,36 @@
+'''
+Given a binary search tree, write a function kthSmallest to find the kth smallest element in it.
+'''
+#Python3
+
+Time Complexity- O(N)
+Space Complexity- O(N)
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
+                
+        ans=[]
+        
+        def inorder(node,k):
+            
+            if node==None:
+                return 0
+            
+            inorder(node.left,k)
+            
+            #normal inorder traversal but stop when kth element is to be added.
+            if len(ans)<k:
+                ans.append(node.val)
+            else:
+                return
+                
+            inorder(node.right,k)
+        
+        inorder(root,k)
+        return ans[k-1]
