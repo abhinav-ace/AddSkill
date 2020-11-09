@@ -1,0 +1,45 @@
+'''
+Given a binary tree containing digits from 0-9 only, each root-to-leaf path could represent a number.
+
+An example is the root-to-leaf path 1->2->3 which represents the number 123.
+
+Find the total sum of all root-to-leaf numbers.
+
+Note: A leaf is a node with no children.
+'''
+#Python3
+
+Time Complexity- O(N)
+Space Complexity-O(N)
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def sumNumbers(self, root: TreeNode) -> int:
+        
+        if not root:
+            return 0
+        
+        vals=[]
+        
+        def dfs(curr,num):
+            
+            if curr==None:
+                return 
+            
+            num=num*10+curr.val
+            
+            #checking if leaf node then append to vals.
+            if curr.left==None and curr.right==None:
+                vals.append(num)
+                
+            dfs(curr.left,num)
+            dfs(curr.right,num)
+            
+        dfs(root,0)
+        
+        return sum(vals)
