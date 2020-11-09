@@ -1,0 +1,49 @@
+'''
+Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.
+
+Note: A leaf is a node with no children.
+'''
+#Python3
+
+Time Complexity-O(N)
+Space Complexity- O(h); h is the height of the tree
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def hasPathSum(self, root: TreeNode, sum: int) -> bool:
+        
+        if not root:
+            return
+        
+        ans=0
+        self.final=0
+        
+        def dfs(curr,ans):
+            
+            if curr==None:
+                return 0
+            
+            ans+=curr.val
+            
+            #checking if the ans is equal to the required sum and the node we are at currently is a leaf or not.
+            if curr.left==None and curr.right==None and ans==sum:
+                self.final=1
+                return 0
+                
+            #else continue dfs.
+            ans+=dfs(curr.left,ans)
+            ans+=dfs(curr.right,ans)
+            
+            return 0
+        
+        dfs(root,ans)
+        
+        if self.final==1:
+            return 1
+        
+        return 0
