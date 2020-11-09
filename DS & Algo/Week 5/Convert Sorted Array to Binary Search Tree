@@ -1,0 +1,40 @@
+'''
+Given an array where elements are sorted in ascending order, convert it to a height balanced BST.
+
+For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
+'''
+#Python3
+
+Time Complexity- O(N)
+Space Complexity-O(logN)
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
+        
+        #Edge Case.
+        if not nums:
+            return
+        
+        def bst(nums):
+            
+            n=len(nums)
+            if n==0:
+                return
+            
+            #The center of the array will be the parent node 
+            #and its left and right are similarly decided recursively.
+            
+            curr=TreeNode(nums[n//2])
+            curr.left=bst(nums[:n//2])
+            curr.right=bst(nums[n//2+1:])
+            
+            return curr
+        
+        return bst(nums)
