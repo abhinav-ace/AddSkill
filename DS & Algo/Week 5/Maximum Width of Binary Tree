@@ -1,0 +1,52 @@
+'''
+Given a binary tree, write a function to get the maximum width of the given tree. 
+The maximum width of a tree is the maximum width among all levels.
+
+The width of one level is defined as the length between the end-nodes (the leftmost and right most non-null nodes in the level, 
+where the null nodes between the end-nodes are also counted into the length calculation.
+
+It is guaranteed that the answer will in the range of 32-bit signed integer.
+'''
+#Python3
+
+Time Complexity- O(N)
+Space Complexity- O(N)
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def widthOfBinaryTree(self, root: TreeNode) -> int:
+        
+        #Edge Case.
+        if root.left==None and root.right==None:
+            return 1
+        
+        #parent holds the index of each node.
+        #child holds the children node's of parent list.
+        parent=[[1,root]]
+        child=[]
+        ans=0
+        
+        #Iterate till last level.
+        while parent:
+            
+            for i in parent:
+                           
+                if i[1].left!=None:
+                    child.append([2*i[0],i[1].left])
+                    
+                if i[1].right!=None:
+                    child.append([2*i[0]+1,i[1].right])
+            
+            #Last level
+            if child:       
+                ans=max(ans,child[-1][0]-child[0][0]+1)
+                
+            parent=child[:]
+            child=[]
+            
+        return ans
