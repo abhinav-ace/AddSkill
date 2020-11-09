@@ -1,0 +1,56 @@
+'''
+Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
+'''
+#Python3
+
+Time Complexity-O(N)
+Space Complexity-O(N)
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        
+        #Edge Case.
+        if not root:
+            return
+        
+        
+        ans=[[root.val]]
+        
+        #parent hold the references to the current level.
+        #child hold the references to the level below parent level.
+        parent=[root]
+        child=[]
+                
+        while parent:
+        
+            #level holds the value at the current level.
+            level=[]
+            
+            for i in parent:
+                
+                if i.left!=None:
+                    child.append(i.left)
+                    level.append(i.left.val)
+                    
+                if i.right!=None:
+                    child.append(i.right)
+                    level.append(i.right.val)
+            
+            if level:
+                ans.append(level)
+            
+            #After an iteration parent becomes child.
+            parent=child[:]
+            child=[]
+            
+        return ans
+                
+            
+                
