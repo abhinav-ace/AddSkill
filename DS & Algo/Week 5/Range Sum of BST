@@ -1,0 +1,37 @@
+'''
+Given the root node of a binary search tree, return the sum of values of all nodes with a value in the range [low, high].
+'''
+#Python3
+
+Time Complexity- O(N)
+Space Complexity- O(H); H is height of the tree
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def rangeSumBST(self, root: TreeNode, low: int, high: int) -> int:
+        
+        self.ans=0
+        self.low=low
+        self.high=high
+        
+        def inorder(curr):
+            
+            if curr==None:
+                return 0
+            
+            inorder(curr.left)
+            
+            if curr.val<=self.high and curr.val>=self.low:
+                self.ans+=curr.val
+                
+            inorder(curr.right)
+            
+        inorder(root)
+        
+        return self.ans
