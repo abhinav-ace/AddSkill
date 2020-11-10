@@ -1,0 +1,45 @@
+'''
+Given preorder and inorder traversal of a tree, construct the binary tree.
+
+Note:
+You may assume that duplicates do not exist in the tree.
+'''
+#Python3
+
+Time Complexity- O(N)
+Space Complexity-O(N)
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        
+        if not preorder:
+            return
+        
+        def helper(inord,preord):
+            
+            if len(inord)==0 and len(preord)==0:
+                return
+                        
+            curr=TreeNode(preord[0])
+                             
+            ind=inord.index(preord[0])
+            leftinord=inord[:ind]
+            rightinord=inord[ind+1:]
+            
+            leftpreord=preord[1:len(leftinord)+1]
+            rightpreord=preord[len(leftinord)+1:]
+            
+            curr.left=helper(leftinord,leftpreord)
+            curr.right=helper(rightinord,rightpreord)
+            
+            return curr
+        
+        return helper(inorder,preorder)
