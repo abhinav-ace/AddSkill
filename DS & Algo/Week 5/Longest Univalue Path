@@ -1,0 +1,46 @@
+'''
+Given the root of a binary tree, return the length of the longest path, where each node in the path has the same value. 
+This path may or may not pass through the root.
+
+The length of the path between two nodes is represented by the number of edges between them.
+'''
+#Python3
+
+Time Complexity-O(N)
+Space Complexity-O(H); H is height of the tree.
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def longestUnivaluePath(self, root: TreeNode) -> int:
+        
+        self.ans=0
+        
+        def helper(curr):
+            
+            if not curr:
+                return 0
+            
+            left=helper(curr.left)
+            right=helper(curr.right)
+            
+            if curr.left!=None and curr.left.val==curr.val:
+                left+=1
+            else:
+                left=0
+                
+            if curr.right!=None and curr.right.val==curr.val:
+                right+=1
+            else:
+                right=0
+            
+            self.ans=max(self.ans,left+right)
+            
+            return max(left,right)
+        
+        helper(root)
+        return self.ans
