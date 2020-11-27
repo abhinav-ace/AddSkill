@@ -1,0 +1,20 @@
+'''
+Find the kth largest element in an unsorted array. 
+Note that it is the kth largest element in the sorted order, not the kth distinct element.
+'''
+#Python3
+
+
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        
+        #Create a heap of size k and remove the smallest n-k elements from the heap.
+        
+        array=nums[:k]
+        heapq.heapify(array)
+        
+        for num in nums[k:]:            
+            if num > array[0]:
+                heapq.heapreplace(array,num)
+                
+        return array[0]
