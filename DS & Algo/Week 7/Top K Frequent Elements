@@ -1,0 +1,21 @@
+'''
+Given a non-empty array of integers, return the k most frequent elements.
+'''
+Python3
+
+Time Complexity- O(nlogk)
+Space Complexity- O(N)
+
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        
+        dic=Counter(nums)        
+        heap=[(value,key) for key,value in dic.items()]
+        
+        heap=heapq.nlargest(k,heap)
+        ans=[]
+        
+        for (key,value) in heap:
+            ans.append(value)
+            
+        return ans
