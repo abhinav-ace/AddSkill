@@ -23,7 +23,7 @@ class Solution:
         high=nums[-1]-nums[0]
         
         #We are assuming the kth distance and then finding out total number of pairs such that there distance is less then our guess distance.
-        #If the count is more this means our guess distance was more so we need to reduce the guess distance.
+        #If the count is more this means our guess distance was more so we need to reduce the guess distance and vice-versa.
         while low<high:
             mid=(low+high)//2
             if possible(mid):
