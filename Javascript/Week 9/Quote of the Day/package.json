@@ -1,0 +1,14 @@
+{
+  "name": "qod",
+  "version": "1.0.0",
+  "description": "Prints quote of the day",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Abhinav Jain",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  }
+}
