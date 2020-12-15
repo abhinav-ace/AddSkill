@@ -1,0 +1,67 @@
+<html>
+
+    <body>
+    
+        <style>
+        
+            #cart{
+                
+                background-color: #aaa;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 100px;
+                width:400px;
+            }
+            
+            #cart td{
+                
+                padding-left:50px;
+                padding-top:20px;
+            }
+            
+            #cart tr{
+                
+                background-color: #ddd;
+            }
+            
+        
+        </style>
+        
+        
+        <table id="cart">
+        
+            <tr>
+
+                <td><h2>Item Name</h2></td>
+                <td><h2>Quantity</h2></td>
+
+            </tr>
+
+
+        </table>
+    
+        
+        <script>
+            
+            for (var i = 0; i < localStorage.length; i++){
+                console.log(localStorage.key(i));
+                var tr1=document.createElement("tr");
+                var td1=document.createElement("td");
+                var td1txt=document.createTextNode(localStorage.key(i).slice(0,localStorage.key(i).length-6));
+                var td2=document.createElement("td");
+                var td2txt=document.createTextNode(localStorage.getItem(localStorage.key(i)));
+                td1.append(td1txt);
+                td2.append(td2txt);
+                tr1.append(td1);
+                tr1.append(td2);
+                cart.append(tr1);
+            }
+            
+            
+            
+            
+        </script>
+        
+    </body>
+    
+</html>
