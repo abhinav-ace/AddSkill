@@ -10,6 +10,7 @@ process.argv.forEach((val, index) => {
 });
 
 //In the .env file you can add the Environment Variables; dotenv loads environment variables from .env file into process.env.
+//create a .env file in the project folder and set NODE_ENV=production or development.
 require('dotenv').config();
 
 //Add an event listener to listen to the event ‘createFolders’ which should trigger a method to create the following folders if not exists based on the NODE_ENV variable from the environment variables:
